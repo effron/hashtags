@@ -6,9 +6,9 @@ class MappingsController < ApplicationController
   end
 
   def create
-    @mapping = Mapping.hash_tag(mapping_params)
-    @mappings = Mapping.top_ten(params[:parent_content])
-    if @mapping.save
+    mapping = Mapping.hash_tag(mapping_params)
+
+    if mapping.save
       redirect_to "/#{@mapping.parent_content}"
     else
       flash[:error] = "Illegal hashtag!!! Must be only letters without spaces"
