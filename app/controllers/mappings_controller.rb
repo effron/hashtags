@@ -16,8 +16,9 @@ class MappingsController < ApplicationController
   end
 
   def show
-    parent = Tag.hashtag(params[:parent_content])
-    if parent.save
+    mapping = Mapping.hash_tag({parent_content: params[:grandparent_content], content: params[:parent_content]})
+    if mapping.save
+      parent = mapping.tag
       @mappings = Mapping.top_ten(parent)
       @mapping = Mapping.new
       @mapping.parent = parent

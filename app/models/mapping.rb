@@ -16,7 +16,9 @@ class Mapping < ActiveRecord::Base
   end
 
   def self.hash_tag(params)
-    parent = Tag.where(content: params[:parent_content].downcase).first_or_create
+    parent_string = params[:parent_content] || ''
+
+    parent = Tag.where(content: parent_string.downcase).first_or_create
     tag = Tag.where(content: params[:content].downcase).first_or_create
 
     mapping = Mapping.where(parent: parent, tag: tag).first_or_initialize
