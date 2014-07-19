@@ -1,0 +1,13 @@
+<div class="tags">
+  <%= link_to "Up", parent_path unless at_root? %>
+  
+  <%= render 'form' %>
+  <ul>
+    <% @mappings.each do |mapping| %>
+        <li>
+          <%= mapping_link(mapping) %>
+        </li>
+    <% end %>
+  </ul>
+
+</div>

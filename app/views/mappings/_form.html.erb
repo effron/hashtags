@@ -1,0 +1,5 @@
+<%= simple_form_for @mapping, url: mapping_path do |f| %>
+    <%= f.input :parent_content, as: :hidden %>
+    <%= f.input :content, label: '#', autofocus: true %>
+    <%= f.submit "hash", class: 'btn btn-default' %>
+<% end %>

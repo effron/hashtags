@@ -9,7 +9,7 @@ class Mapping < ActiveRecord::Base
     joins(:votes).
     group("mappings.id").
     order("mappings_count DESC").
-    having("mappings.parent_id = #{ parent.id }")
+    having("mappings.parent_id = #{ parent && parent.id }")
     limit(10)
   end
 
