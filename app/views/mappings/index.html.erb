@@ -3,11 +3,7 @@
   
   <%= render 'form' %>
   <ul>
-    <% @mappings.each do |mapping| %>
-        <li>
-          <%= mapping_link(mapping) %>
-        </li>
-    <% end %>
+    <%= render @mappings %>
   </ul>
 
 </div>

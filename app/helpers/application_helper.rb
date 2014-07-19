@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def mapping_link(mapping)
-    link_to "##{mapping.tag.content} (#{mapping.votes.size})", child_path(mapping.content)
+    link_to "##{mapping.tag.content} (#{mapping.score})", child_path(mapping.content)
   end
 
   def child_path(slug)
