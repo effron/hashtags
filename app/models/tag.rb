@@ -1,8 +1,8 @@
 class Tag < ActiveRecord::Base
 
-  has_many :parent_mappings, class_name: "Mapping", foreign_key: :parent_id
+  has_many :child_mappings, class_name: "Mapping", foreign_key: :parent_id
   has_many :mappings
-  has_many :votes, through: :parent_mappings
+  has_many :votes, through: :mappings
 
   attr_accessor :parent_content
 
