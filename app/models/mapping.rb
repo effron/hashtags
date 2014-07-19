@@ -4,7 +4,7 @@ class Mapping < ActiveRecord::Base
   has_many :votes
   validates :tag_id, presence: true
 
-  after_save :tally_vote
+  after_save :tally_vote_and_upvote_parent
 
   def self.top_ten(parent)
     having_clause = parent.blank? ? "IS NULL" : "= ?"
@@ -42,7 +42,11 @@ class Mapping < ActiveRecord::Base
 
   private
 
-  def tally_vote
+  def tally_vote_and_upvote_parent
     votes.create!
+    unless parent.nil?
+      toplevel = Mapping.where(tag: parent, parent: nil).first
+      toplevel.votes.create!
+    end
   end
 end
