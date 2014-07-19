@@ -4,16 +4,20 @@ class Tag < ActiveRecord::Base
   has_many :mappings
   has_many :votes, through: :mappings
 
-  attr_accessor :parent_content
-
   before_validation :hashify
 
   validates :content, presence: true, uniqueness: true, format: { with: %r{\A[a-z]+\z}, message: "must be alphabetical" }
+
+  after_create :save_mapping
 
   private
 
   def hashify
     self.content = content.downcase
+  end
+
+  def save_mapping
+    mappings.create!
   end
 
 end
