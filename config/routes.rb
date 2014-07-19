@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  root "tags#index"
-  get "/:parent_content", to: "tags#show"
-  get "/:grandparent_content/:parent_content", to: "tags#show"
+  root "mappings#index"
+  get "/:parent_content", to: "mappings#show"
+  get "/:grandparent_content/:parent_content", to: "mappings#show"
 
-  resource :tag, only: :create
+  resource :mapping, only: :create
 end
