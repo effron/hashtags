@@ -9,7 +9,7 @@ class MappingsController < ApplicationController
     mapping = Mapping.hash_tag(mapping_params)
 
     if mapping.save
-      redirect_to "/#{@mapping.parent_content}"
+      redirect_to "/#{mapping.parent_content}"
     else
       flash[:error] = "Illegal hashtag!!! Must be only letters without spaces"
       redirect_to :back
