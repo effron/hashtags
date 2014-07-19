@@ -5,11 +5,13 @@ class Mapping < ActiveRecord::Base
   validates :tag_id, presence: true
 
   def self.top_ten(parent)
+    having_clause = parent.blank? ? "IS NULL" : "= ?"
+ 
     select("mappings.*, count(votes.id) AS mappings_count").
     joins(:votes).
     group("mappings.id").
     order("mappings_count DESC").
-    having("mappings.parent_id = #{ parent && parent.id }")
+    having("mappings.parent_id #{having_clause}", parent && parent.id).
     limit(10)
   end
 
