@@ -11,7 +11,8 @@ class MappingsController < ApplicationController
     if @mapping.save
       redirect_to "/#{@mapping.parent_content}"
     else
-      render 'index'
+      flash[:error] = "Illegal hashtag!!! Must be only letters without spaces"
+      redirect_to :back
     end
   end
 
