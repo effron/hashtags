@@ -18,8 +18,8 @@ module ApplicationHelper
     result
   end
 
-  def tag_link(tag)
-    link_to "##{tag.content} (#{tag.votes})", child_path(tag.content)
+  def mapping_link(mapping)
+    link_to "##{mapping.tag.content} (#{mapping.score})", child_path(mapping.content)
   end
 
   def child_path(slug)
