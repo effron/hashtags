@@ -6,8 +6,8 @@ class Mapping < ActiveRecord::Base
 
   after_save :tally_vote_and_upvote_parent
 
-  def self.top_ten(parent)
-    having_clause = parent.blank? ? "IS NULL" : "= ?"
+  def self.top_ten(parent = nil)
+    having_clause = parent.present? ?  "= ?" : "IS NULL"
  
     select("mappings.*, count(votes.id) AS mappings_count").
     joins(:votes).

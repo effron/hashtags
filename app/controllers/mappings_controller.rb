@@ -1,7 +1,7 @@
 class MappingsController < ApplicationController
 
   def index
-    @mappings = Mapping.top_ten(nil)
+    @mappings = Mapping.top_ten
     @mapping = Mapping.new
   end
 
