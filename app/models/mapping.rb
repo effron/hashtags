@@ -6,11 +6,14 @@ class Mapping < ActiveRecord::Base
 
   after_save :tally_vote_and_upvote_parent
 
-  def self.top_ten(parent = nil)
+  def self.top_ten(opts = {})
+    parent = opts[:parent]
     having_clause = parent.present? ?  "= ?" : "IS NULL"
+    days_ago = opts[:days_ago] || 2
  
     select("mappings.*, count(votes.id) AS mappings_count").
     joins(:votes).
+    where("votes.created_at > current_date - interval '?' day", days_ago).
     group("mappings.id").
     order("mappings_count DESC").
     having("mappings.parent_id #{having_clause}", parent && parent.id).

@@ -20,7 +20,7 @@ class MappingsController < ApplicationController
     mapping = Mapping.hash_tag({parent_content: params[:grandparent_content], content: params[:parent_content]})
     if mapping.save
       parent = mapping.tag
-      @mappings = Mapping.top_ten(parent)
+      @mappings = Mapping.top_ten(parent: parent)
       @mapping = Mapping.new
       @mapping.parent = parent
       render 'index'
